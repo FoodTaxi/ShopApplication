@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { OrderPage } from '../pages/order/order';
 import { LoginService} from '../providers/login-service';
 
 
@@ -31,6 +32,7 @@ export function getAuthHttp(http) {
     MyApp,
     ListPage,
     LoginPage,
+    OrderPage,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ export function getAuthHttp(http) {
   entryComponents: [
     MyApp,
     ListPage,
-    LoginPage
+    LoginPage,
+    OrderPage
   ],
   providers: [
     StatusBar,

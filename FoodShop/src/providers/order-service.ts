@@ -20,26 +20,40 @@ export class OrderService {
     	// We're using Angular HTTP provider to request the data,
    		// then on the response, it'll map the JSON data to a parsed JS object.
     	// Next, we process the data and resolve the promise with the new data.
-    	this.authHttp.get(AppSettings.API_ENDPOINT + '/private/order/shop?sid=50')
+    	this.authHttp.get(AppSettings.API_ENDPOINT + '/private/order/shop?sid=0')
        .map(res => res.json())
        .subscribe(data => {
           resolve(data);
         }, err => {
+          console.log('dsajdhaskdbaskjdhjksahdaskj');
           console.log(err)
           reject(err);
         });
   	});
   }
 
-  confirmOrder(order) {
+  confirmOrder(order, minutes) {
     return new Promise((resolve,reject) => {
 
       let confirmObject  = {
-        "completionMinutes": 0,
+        "completionMinutes": Number(minutes),
         "confirmed": true,
         "orderId": order.id
       };
       this.authHttp.post(AppSettings.API_ENDPOINT + '/private/order/confirm', confirmObject)
+       .subscribe(data => {
+          resolve(data);
+        }, err => {
+          console.log(err)
+          reject(err);
+        });
+    });
+  }
+
+   handoverOrder(order) {
+    return new Promise((resolve,reject) => {
+
+      this.authHttp.post(AppSettings.API_ENDPOINT + '/private/order/handover?oid=' + order.id, {})
        .subscribe(data => {
           resolve(data);
         }, err => {
