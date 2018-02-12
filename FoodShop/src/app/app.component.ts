@@ -16,7 +16,7 @@ import { LoginService } from '../providers/login-service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any;
 
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public loginService: LoginService) {
@@ -34,6 +34,8 @@ export class MyApp {
        this.loginService.isTokenSaved().then(saved => {
         if(saved) {
           this.nav.setRoot(ListPage);
+        } else {
+            this.nav.setRoot(LoginPage);
         }
       });
     });

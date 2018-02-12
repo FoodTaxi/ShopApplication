@@ -1,0 +1,50 @@
+<!--
+  Generated template for the Delivery page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+     <ion-navbar>
+            <ion-title>Поръчка</ion-title>
+            <ion-buttons end>
+                <button ion-button icon-only (click)="closeModal()">
+                    <ion-icon item-right name="ios-close-outline"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div> 
+  	 <ion-grid class="order-info-grid"> 
+         <ion-row>
+          <ion-col>
+            <p>
+              <b>Поръчка #{{order.id}}</b> - {{order.itemDescription}}
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Име на клиента: {{order.custName}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Телефон на клиента: {{order.custPhone}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Поща на клиента: {{order.custEmail}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="close-button-div">
+        <button class="close-button" ion-button icon-only (click)="closeModal()">Излез</button>
+      </div>
+  </div>
+
+</ion-content>
+

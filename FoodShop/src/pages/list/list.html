@@ -1,28 +1,39 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>List</ion-title>
+    <ion-title>Поръчки към обекта</ion-title>
+    <ion-buttons end>
+                <button ion-button icon-only  (click)="logout()">Изход
+                   <ion-icon name="exit"></ion-icon>
+                </button>
+            </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let order of openOrders" >
-      {{order.itemDescription}}
-      <div class="item-note" item-end>
-        <div *ngIf="order.status == 'AWAITING_CONFIRMATION'">
-          <button ion-item (click)="confirm(order)">Confirm</button>
-        </div>
-        <div *ngIf="order.status != 'AWAITING_CONFIRMATION'">
-          {{order.status}}
-        </div>
-      </div>
-    </button>
-  </ion-list>
-
-  <button ion-item (click)="logout()">
-    Logout
-  </button>
+   <ion-grid>
+        <ion-row  *ngFor="let order of openOrders" class="{{orderRowColor(order)}}">
+          <ion-col col-8>
+            <p>
+              Поръчка #{{order.id}} - {{order.itemDescription}}
+            </p>
+            <p>
+              <button ion-button (click)="presentOrderModal(order)">Поръчка</button>
+            </p>
+          </ion-col >
+          <ion-col >
+              <div *ngIf="order.status != 'AWAITING_CONFIRMATION'">
+                <p >{{order.timeleft}}</p>
+              </div>
+          </ion-col>
+          <ion-col >
+  
+              <div *ngIf="order.status == 'AWAITING_CONFIRMATION'">
+                <button ion-button (click)="presentConfirmPrompt(order)">Потвърди</button>
+              </div>
+              <div *ngIf="order.status != 'AWAITING_CONFIRMATION'">
+                <button ion-button (click)="presentEnterPinPrompt(order)">Предай</button>
+              </div>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
 </ion-content>
